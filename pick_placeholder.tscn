@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnn00qmc6vf1q"]
+
+[ext_resource type="Texture2D" uid="uid://bsicyutk4vv6i" path="res://characters/DOM/pickaxe.png" id="1_1ux7d"]
+[ext_resource type="Script" path="res://characters/DOM/pick_placeholder.gd" id="2_6eca2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu6j8"]
+radius = 65.1365
+height = 130.273
+
+[node name="pick_placeholder" type="Sprite2D"]
+rotation = 1.49226
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_1ux7d")
+script = ExtResource("2_6eca2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_xu6j8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

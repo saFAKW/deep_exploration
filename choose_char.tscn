@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddusibw8fpdpy"]
+
+[ext_resource type="Script" path="res://CC/choose_char.gd" id="1_dn7yv"]
+[ext_resource type="Texture2D" uid="uid://bascbxy5uw6il" path="res://bg/choosechar.png" id="2_i58h1"]
+[ext_resource type="Texture2D" uid="uid://cr5axe3cpnssr" path="res://CC/yaz.png" id="3_rdyi8"]
+[ext_resource type="Texture2D" uid="uid://by3gpsnxhppl0" path="res://characters/YAZ/yaz_standing.png" id="4_pia3i"]
+[ext_resource type="Texture2D" uid="uid://brys6ffirgqwo" path="res://characters/YAZ/bomb.png" id="5_4fmgl"]
+[ext_resource type="Texture2D" uid="uid://d045yjdj8sds5" path="res://CC/dom.png" id="6_hajob"]
+[ext_resource type="Texture2D" uid="uid://c4d7kqd7qudvx" path="res://characters/DOM/dom_standing.png" id="7_l6tvm"]
+[ext_resource type="Texture2D" uid="uid://bsicyutk4vv6i" path="res://characters/DOM/pickaxe.png" id="8_1x4ho"]
+[ext_resource type="Texture2D" uid="uid://cksxp3ltg0heu" path="res://CC/return.png" id="9_x8ile"]
+[ext_resource type="AudioStream" uid="uid://c1vqwfpquditv" path="res://noises/button move.mp3" id="10_bwxfy"]
+[ext_resource type="AudioStream" uid="uid://lp0lsj34da45" path="res://levels/inventory/cyborg-ninja-kevin-macleod-main-version-7993-03-00.mp3" id="11_avgcc"]
+
+[node name="choose_char" type="Node2D"]
+script = ExtResource("1_dn7yv")
+
+[node name="Choosechar" type="Sprite2D" parent="."]
+position = Vector2(958, 500)
+texture = ExtResource("2_i58h1")
+
+[node name="yazC" type="Button" parent="."]
+offset_left = 286.0
+offset_top = 192.0
+offset_right = 825.0
+offset_bottom = 915.0
+icon = ExtResource("3_rdyi8")
+flat = true
+metadata/_edit_group_ = true
+
+[node name="YazStanding" type="Sprite2D" parent="yazC"]
+position = Vector2(272, 480)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_pia3i")
+
+[node name="Bomb" type="Sprite2D" parent="yazC"]
+position = Vector2(290, 206)
+rotation = -0.359538
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_4fmgl")
+
+[node name="domC" type="Button" parent="."]
+offset_left = 1103.0
+offset_top = 194.0
+offset_right = 1645.0
+offset_bottom = 914.0
+icon = ExtResource("6_hajob")
+flat = true
+metadata/_edit_group_ = true
+
+[node name="DomStanding" type="Sprite2D" parent="domC"]
+position = Vector2(274, 465)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_l6tvm")
+
+[node name="Pickaxe" type="Sprite2D" parent="domC"]
+position = Vector2(274, 183)
+rotation = -5.14698
+texture = ExtResource("8_1x4ho")
+
+[node name="return" type="Button" parent="."]
+offset_left = 73.0
+offset_top = 826.0
+offset_right = 231.0
+offset_bottom = 936.0
+icon = ExtResource("9_x8ile")
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_bwxfy")
+
+[node name="bgmusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_avgcc")
+autoplay = true
+
+[connection signal="pressed" from="yazC" to="." method="_on_yaz_c_pressed"]
+[connection signal="pressed" from="domC" to="." method="_on_dom_c_pressed"]
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]

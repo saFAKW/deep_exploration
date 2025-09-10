@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxtxo21gb8woc"]
+
+[ext_resource type="Script" path="res://characters/YAZ/yaz.gd" id="1_43poo"]
+[ext_resource type="Texture2D" uid="uid://40yf6vmnt3qb" path="res://characters/YAZ/yaz_jumping.png" id="2_ar300"]
+[ext_resource type="Texture2D" uid="uid://cw8mq7knigjrs" path="res://characters/YAZ/yaz_running.png" id="3_0p20g"]
+[ext_resource type="Texture2D" uid="uid://by3gpsnxhppl0" path="res://characters/YAZ/yaz_standing.png" id="3_py33q"]
+[ext_resource type="Texture2D" uid="uid://d1ob16ph6r2va" path="res://characters/YAZ/yaz_throwing.png" id="5_hmdbl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3ro6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ar300")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0p20g")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_py33q")
+}],
+"loop": true,
+"name": &"Stance",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hmdbl")
+}],
+"loop": true,
+"name": &"Throw",
+"speed": 5.0
+}]
+
+[node name="yaz_moves" type="Node2D"]
+
+[node name="yaz" type="Sprite2D" parent="."]
+position = Vector2(-3, -1)
+script = ExtResource("1_43poo")
+
+[node name="yaz_anim" type="AnimatedSprite2D" parent="yaz"]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_t3ro6")
+animation = &"Throw"
+
+[node name="bomb_marker" type="Marker2D" parent="yaz"]
+position = Vector2(94, -94)
+
+[node name="bomb_markerL" type="Marker2D" parent="yaz"]
+position = Vector2(-45, -95)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://4dtfble8l4jg"]
+
+[ext_resource type="Script" path="res://characters/DOM/pickaxe.gd" id="1_fp6mr"]
+[ext_resource type="Texture2D" uid="uid://bsicyutk4vv6i" path="res://characters/DOM/pickaxe.png" id="2_2ggmy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xxjp"]
+radius = 6.69231
+height = 59.3232
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jsmdt"]
+size = Vector2(40.0459, 63.3028)
+
+[node name="pickaxe_moves" type="Node2D"]
+
+[node name="pickaxe" type="RigidBody2D" parent="."]
+position = Vector2(-1.14441e-05, 4.76837e-07)
+rotation = -3.12435
+script = ExtResource("1_fp6mr")
+metadata/_edit_group_ = true
+
+[node name="pickaxe_sprite" type="Sprite2D" parent="pickaxe"]
+position = Vector2(-3.8147e-06, -4.76837e-07)
+rotation = -4.51168
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2ggmy")
+
+[node name="pickaxe_coll" type="CollisionShape2D" parent="pickaxe"]
+position = Vector2(-1.14441e-05, 0)
+rotation = -0.549779
+shape = SubResource("CapsuleShape2D_0xxjp")
+
+[node name="pickaxe_check" type="Area2D" parent="pickaxe"]
+
+[node name="collision" type="CollisionShape2D" parent="pickaxe/pickaxe_check"]
+position = Vector2(-0.687022, -1.25145)
+rotation = -0.610865
+shape = SubResource("RectangleShape2D_jsmdt")
+
+[node name="sheath" type="AudioStreamPlayer2D" parent="pickaxe"]
+
+[connection signal="body_entered" from="pickaxe/pickaxe_check" to="pickaxe" method="_on_pickaxe_check_body_entered"]

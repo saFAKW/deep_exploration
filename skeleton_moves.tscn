@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8nsv81gl2n4s"]
+
+[ext_resource type="Script" path="res://characters/SKELETON/skeleton.gd" id="1_t1pbm"]
+[ext_resource type="Texture2D" uid="uid://b8r67dqm0q3fq" path="res://characters/SKELETON/skeletonfight.png" id="2_8tkcm"]
+[ext_resource type="Texture2D" uid="uid://dnslbsdou2wyp" path="res://characters/SKELETON/skeletonfight2.png" id="3_oernn"]
+[ext_resource type="Texture2D" uid="uid://p5gfe0em2uoa" path="res://characters/SKELETON/skeletonrest.png" id="4_3jysh"]
+[ext_resource type="Texture2D" uid="uid://jvuxawpawvfk" path="res://characters/SKELETON/sletonwalk2.png" id="5_qlrlc"]
+[ext_resource type="Texture2D" uid="uid://bvr1yh43e32ye" path="res://levels/inventory/right key.png" id="6_51dxa"]
+[ext_resource type="Texture2D" uid="uid://behcjxrm7fq54" path="res://levels/inventory/wrong key.png" id="7_dc8j6"]
+[ext_resource type="AudioStream" uid="uid://bsjusvynug3n4" path="res://noises/zapsplat_horror_monster_agressive_short_growl_54463.mp3" id="8_w6eyu"]
+[ext_resource type="AudioStream" uid="uid://dj5dji3vuebq1" path="res://characters/SKELETON/box-of-stuff-fallswav-14524.mp3" id="9_u076f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vb1qx"]
+radius = 45.0
+height = 298.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwk1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8tkcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oernn")
+}],
+"loop": true,
+"name": &"Fight",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3jysh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qlrlc")
+}],
+"loop": true,
+"name": &"Stance",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ixdog"]
+height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3g46"]
+radius = 44.0
+height = 94.0
+
+[node name="skeleton_moves" type="Node2D"]
+
+[node name="skeleton" type="CharacterBody2D" parent="."]
+position = Vector2(0, -1)
+script = ExtResource("1_t1pbm")
+metadata/_edit_group_ = true
+
+[node name="skel_rad" type="Area2D" parent="skeleton"]
+
+[node name="radius" type="CollisionShape2D" parent="skeleton/skel_rad"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vb1qx")
+
+[node name="skel_anim" type="AnimatedSprite2D" parent="skeleton"]
+sprite_frames = SubResource("SpriteFrames_lwk1k")
+animation = &"Fight"
+
+[node name="keys" type="Area2D" parent="skeleton"]
+
+[node name="WrongKey" type="Sprite2D" parent="skeleton/keys"]
+position = Vector2(1, -1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_dc8j6")
+
+[node name="RightKey" type="Sprite2D" parent="skeleton/keys"]
+position = Vector2(0, -1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_51dxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skeleton/keys"]
+shape = SubResource("CapsuleShape2D_ixdog")
+
+[node name="skel_coll" type="CollisionShape2D" parent="skeleton"]
+shape = SubResource("CapsuleShape2D_r3g46")
+
+[node name="roaring" type="AudioStreamPlayer2D" parent="skeleton"]
+stream = ExtResource("8_w6eyu")
+
+[node name="death" type="AudioStreamPlayer2D" parent="skeleton"]
+stream = ExtResource("9_u076f")
+
+[connection signal="body_entered" from="skeleton/skel_rad" to="skeleton" method="_on_skel_rad_body_entered"]
